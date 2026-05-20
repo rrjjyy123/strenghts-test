@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아동·청소년 강점검사 - 요인별 강·약점 가이드 & FAQ</title>
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --knowledge-color: #4A90E2;
+            --action-color: #2ECC71;
+            --will-color: #F1C40F;
+            --relation-color: #E67E22;
+            --emotion-color: #9B5DE5;
+            --faq-color: #34495E;
+            --text-dark: #2C3E50;
+            --bg-light: #F8F9FA;
+            --strength-bg: #EBF5FB;
+            --weakness-bg: #FDEDEC;
+        }
+
+        body {
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 26px;
+            color: var(--text-dark);
+            word-break: keep-all;
+        }
+
+        header p {
+            margin: 0;
+            color: #7F8C8D;
+            font-size: 15px;
+            word-break: keep-all;
+        }
+
+        .category-title {
+            font-size: 20px;
+            padding: 12px 20px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            color: white;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .bg-knowledge { background-color: var(--knowledge-color); }
+        .bg-action { background-color: var(--action-color); }
+        .bg-will { background-color: var(--will-color); color: #333; }
+        .bg-relation { background-color: var(--relation-color); }
+        .bg-emotion { background-color: var(--emotion-color); }
+        .bg-faq { background-color: var(--faq-color); }
+
+        /* 아코디언 스타일 */
+        .accordion-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            overflow: hidden;
+            border-left: 5px solid #BDC3C7;
+            transition: all 0.3s ease;
+        }
+
+        .border-knowledge { border-left-color: var(--knowledge-color); }
+        .border-action { border-left-color: var(--action-color); }
+        .border-will { border-left-color: var(--will-color); }
+        .border-relation { border-left-color: var(--relation-color); }
+        .border-emotion { border-left-color: var(--emotion-color); }
+        .border-faq { border-left-color: var(--faq-color); }
+
+        .accordion-header {
+            padding: 18px 20px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            background-color: #fff;
+        }
+
+        .accordion-header:hover {
+            background-color: #FBFBFC;
+        }
+
+        .accordion-icon {
+            font-size: 14px;
+            color: #7F8C8D;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #fff;
+        }
+
+        .accordion-body {
+            padding: 0 20px 20px 20px;
+        }
+
+        /* 활성화 상태 */
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 1000px; /* 충분히 큰 값 설정 */
+            transition: max-height 0.5s ease-in;
+        }
+
+        /* 내부 가이드 섹션 */
+        .guide-section {
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .guide-strength { background-color: var(--strength-bg); }
+        .guide-weakness { background-color: var(--weakness-bg); }
+        .faq-answer { background-color: #F1F2F6; padding: 18px; border-radius: 6px; margin-top: 5px; }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 20px;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .badge-strength { background-color: #3498DB; }
+        .badge-weakness { background-color: #E74C3C; }
+        .badge-q { background-color: #7F8C8D; }
+        .badge-a { background-color: #34495E; }
+
+        .guide-content, .faq-content {
+            margin: 0;
+            font-size: 15px;
+            word-break: keep-all;
+            text-align: justify;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 25px 20px;
+            color: #7F8C8D;
+            font-size: 13px;
+            border-top: 1px solid #E2E8F0;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>아동·청소년 강점검사 자녀지도 가이드</h1>
+        <p>요인별 강점을 클릭하시면 상세 내용(강점활용 및 약정보완)을 확인하실 수 있습니다.</p>
+    </header>
+
+    <div class="category-title bg-knowledge">●● 지식</div>
+
+    <div class="accordion-item border-knowledge">
+        <div class="accordion-header">호기심 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">호기심을 갖는 부분에 대해 스스로 알아볼 수 있도록 지도합니다. 해당 분야의 전문가나 전문 서적 등을 찾아보며 스스로 호기심을 해결해나가는 방향을 제시해 줍니다. 또는 새로운 분야에 대해 적극적으로 탐색해 볼 수 있는 과제를 제시합니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">학생에게 질문을 던지며 호기심을 가질 수 있도록 합니다. 학생에게 질문을 할 때에는 '예', '아니오'로 답할 수 있는 닫힌 질문보다는 스스로 생각해 보고 대답할 수 있는 열린 질문을 하도록 합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-knowledge">
+        <div class="accordion-header">지적 탐구심 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">학생이 새로운 것들을 배우고 익히는 것에서 그치지 않고 배운 것에 대해 더 깊이 알아보고 응용할 수 있는 환경을 제공합니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">무언가를 배우는 것에 재미를 느낄 수 있도록 가장 흥미 있는 분야부터 학습하는 방식으로 지도하며 학습과 취미를 접목할 수 있도록 도와줍니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-knowledge">
+        <div class="accordion-header">창의성 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">조금은 특이한 생각으로 새로움을 추구하는 모습을 보일 때 그것을 억압하기보다는 왜 그런 생각을 했는지 물어봅니다. 새로운 생각에 대해 칭찬을 해주며 공모전이나 각종 대회를 추천하여 스스로 창의성을 발휘할 수 있는 기회를 제공합니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">새로운 방법을 생각해 낼 수 있는 기회를 제공하고, 힘들어한다면 친구들과 함께 이야기 나누어 볼 수 있도록 도와줍니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="category-title bg-action">●● 행동</div>
+
+    <div class="accordion-item border-action">
+        <div class="accordion-header">리더십 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">학생 스스로 리더로서 집단에 어떤 영향을 미치게 될지, 어떤 노력을 해야 더 좋은 방향으로 나아갈지 생각해 보고 행동할 수 있도록 도와줍니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">여러 친구들의 말을 귀담아듣고 이를 조율할 수 있는 기회를 제공합니다. 혹은 좋은 리더를 선정하여 그 사람이 어떻게 사람들을 이끌어가는지 살펴보도록 안내합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-action">
+        <div class="accordion-header">적극성 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">적극적으로 참여하였을 때 얻을 수 있었던 긍정적인 보상이 무엇이었는지 친구들과 공유할 수 있는 기회를 제공합니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">자신이 가장 열심히 참여했던 일을 떠올려보고 열심히 참여했을 때 어떤 보상이 주어졌는지 생각해 보도록 합니다. 그리고 재미를 느끼는 일 한 가지를 정해두고 그 일만큼은 적극적으로 참여하도록 지도합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-action">
+        <div class="accordion-header">용감성 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">용기 있게 나섰기 때문에 경험할 수 있었던 긍정적인 일들을 친구들과 공유하는 시간을 마련합니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">용기 있게 자신의 의견을 이야기할 수 있는 기회를 줍니다. 그것이 좋지 않은 의견일지라도 용기 내어 이야기 한 부분에 대해서는 칭찬해 줍니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-action">
+        <div class="accordion-header">신중성 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">학생이 신중한 행동을 하였을 때 칭찬하며, 다른 친구들도 한 번 더 생각해 보고 신중한 결정을 내릴 수 있도록 돕는 방향으로 지도합니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">어떤 행동을 할 때 그 행동 뒤에 어떤 상황이 벌어질지 3번 생각해 보고 행동할 수 있도록 지도합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="category-title bg-will">●● 의지</div>
+
+    <div class="accordion-item border-will">
+        <div class="accordion-header">책임감 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">책임감이 필요한 일을 맡기거나 주변 친구들 중 맡은 일을 끝까지 완성하지 못하는 친구를 도울 수 있도록 지도합니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">하던 일을 포기하려고 한다면, 그것을 포기했을 때의 단점과 끝까지 책임지고 완료했을 때의 장점을 생각해 볼 수 있도록 유도합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-will">
+        <div class="accordion-header">도덕성 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">스스로 규칙을 지키는 것에서 더 나아가 다른 친구들도 규칙을 지킬 수 있게 도와주는 역할을 맡깁니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">집단 구성원으로서 지켜야 하는 규칙이 어떤 것이 있을지 스스로 써보고 그것을 지키도록 지도합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-will">
+        <div class="accordion-header">계획성 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">스스로 계획을 세워 생활하도록 지도하고 지금까지보다 더 구체적이고 세분화된 계획을 세워보도록 안내합니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">실천하기 쉬운 작은 계획부터 세워나갈 수 있도록 도와줍니다. 계획대로 체크리스트를 만들어 진행하도록 지도합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-will">
+        <div class="accordion-header">성취지향성 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">지금까지 이뤄낸 목표들을 적어보도록 하고 조금 더 높은 목표를 설정할 수 있도록 도와줍니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">어떤 목표를 정하고 이를 성취했을 때 스스로에게 보상을 하도록 지도합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="category-title bg-relation">●● 관계</div>
+
+    <div class="accordion-item border-relation">
+        <div class="accordion-header">공감 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">힘들어하는 친구가 있다면 위로해 주고 마음을 토닥여줄 수 있도록 합니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">사람들과 이야기 나눌 때 상대방의 표정이나 말투에서 어떤 감정들이 느껴지는지 살펴볼 수 있도록 지도합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-relation">
+        <div class="accordion-header">원만성 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">토론 장면 등에서 원만성을 발휘하여 중재할 수 있는 역할을 맡겨봅니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">친구들과 이야기할 때 자신의 주장만을 내세우지 않고 친구의 이야기도 들어줄 수 있도록 지도합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-relation">
+        <div class="accordion-header">사교성 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">많은 사람들과 어울릴 수 있는 동아리 등에 참여하도록 도와줍니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">낯선 상황에서도 웃으며 사람들에게 다가가도록 지도합니다. 만약 먼저 다가가는 것이 어렵다면 다른 사람들과 빠르고 쉽게 친해지는 사람들이 어떻게 행동하는지 살펴볼 수 있게 도와줍니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-relation">
+        <div class="accordion-header">이타심 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">각종 봉사활동에 참여할 수 있는 기회를 제공하여 사람들을 돕는 것에서 만족감을 경험할 수 있도록 도와줍니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">어려운 사람들을 보면 어떤 감정이 드는지, 그들을 도와주었을 때 내 스스로 기분이 어떤지 생각하는 시간을 마련합니다. 다른 사람을 위해 봉사하고 기쁨을 줄 수 있는 사람이란 것을 알 수 있도록 도와줍니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="category-title bg-emotion">●● 감성</div>
+
+    <div class="accordion-item border-emotion">
+        <div class="accordion-header">예술적 감수성 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">직접 그림을 그리거나 글을 써보는 등 아름다움을 표현하는 활동을 해볼 수 있도록 하거나 미술관이나 공연장을 찾아 아름다움을 만끽할 수 있도록 도와줍니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">등하굣길, 수업 시간 등 생활 속에서 아름다운 부분을 찾아볼 수 있도록 도와줍니다. 작고 사소한 것이라도 아름다움을 느낄 수 있다는 것을 알려줍니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-emotion">
+        <div class="accordion-header">긍정성 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">앞으로의 미래에 대해 적어보는 시간을 갖도록 합니다. 그리고 희망적인 미래를 만나기 위해 어떤 노력을 해야 할지 생각해 보도록 지도합니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">삶과 앞으로의 미래에 대해 희망적이지 않고 부정적으로 생각하고 있다면 긍정적인 태도로 임했을 때 만나게 될 긍정적인 상황에 대해 생각해 보도록 안내합니다. 또 작고 사소한 것이라도 행복했던 경험을 적어보는 행복일기를 써보도록 지도합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-emotion">
+        <div class="accordion-header">감정 회복력 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">실패 경험을 했을 때 그것을 통해 무엇을 배웠는지 생각해볼 수 있도록 지도합니다. 그리고 주변 친구들과 스트레스를 어떻게 이겨내고 있는지 이야기를 나눌 수 있는 시간을 제공합니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">부정적인 상황이 되었을 때, 그 상황을 객관적으로 바라보고 합리적으로 생각해보게 하여 이겨낼 수 있도록 도와줍니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-emotion">
+        <div class="accordion-header">유머 <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="guide-section guide-strength">
+                    <span class="badge badge-strength">강점활용</span>
+                    <p class="guide-content">주변 사람들을 즐겁게 만들어주는 강점을 발휘할 수 있도록 사회자 역할을 맡겨봅니다.</p>
+                </div>
+                <div class="guide-section guide-weakness">
+                    <span class="badge badge-weakness">약정보완</span>
+                    <p class="guide-content">유머러스한 친구는 어떤 식으로 친구들을 즐겁게 해주는지 살펴보도록 지도합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="category-title bg-faq">6. FAQ</div>
+
+    <div class="accordion-item border-faq">
+        <div class="accordion-header">Q. 타당도가 낮게 나왔습니다. 어떻게 해석하여야 하나요? <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="faq-answer">
+                    <p class="faq-content">타당도는 학생의 응답 양상을 유추해 볼 수 있는 부분입니다. 타당도가 낮은 것은 학생이 다소 불성실하게 응답하였다는 것을 의미하며, 무응답으로 일관하거나 동일한 번호로 계속해서 응답하는 등의 응답 방식을 반영합니다.<br><br>따라서 이 경우, 개별 문항에 대해 본인이 생각하는 바를 정확하게 답하지 않아 결과지를 통해 드러난 결과가 학생의 현재 상태를 반영한 것이라 보기 어려우므로 해석에 유의하여야 합니다. 가능하다면 재검사를 실시할 것을 권장합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-faq">
+        <div class="accordion-header">Q. 요인들의 점수가 대체로 비슷합니다. 어떻게 해석해야 하나요? <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="faq-answer">
+                    <p class="faq-content">본 검사는 각각의 문항에 대하여 1에서 4까지 4개의 보기 중 하나를 선택하는 검사입니다. 만약 '3(그렇다)'으로 대체로 응답할 시 높고 낮음이 없는 평이한 점수들로 산출될 수 있습니다. 이 경우 어떠한 요인이 강점으로 두드러진다기보다 여러 요인이 고르게 비슷한 정도로 발달되어 있다고 해석하시기 바랍니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-faq">
+        <div class="accordion-header">Q. 검사 결과와 실제 학생 모습이 다른 것 같아요. 왜 차이가 있나요? <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="faq-answer">
+                    <p class="faq-content">본 검사는 학생들이 자신의 특성에 대해 직접 보고하는 자기보고식 검사이므로 학생 스스로가 생각하는 주관적인 자신의 모습을 반영합니다.<br><br>따라서 응답 태도가 다소 보수적인 경우 실제보다 과소 추정된 결과를 보일 수 있으며, 스스로를 포장하거나 바람직하게 보이려는 의도가 있을 경우 실제보다 긍정적인 결과가 나타날 수 있습니다. 검사 결과를 토대로 학생과 상담을 진행할 때 이러한 점들을 고려하면 좋을 것입니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-faq">
+        <div class="accordion-header">Q. 긍정응답률과 부정응답률의 합이 100이 아닌 101로 나옵니다. 왜 이런 것일까요? <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="faq-answer">
+                    <p class="faq-content">긍정응답률과 부정응답률은 정수로 반올림하여 제시됩니다. 따라서 두 요인의 합은 100이 되어야 하지만, 간혹 두 요인 모두 0.5로 끝나는 경우 반올림으로 인해 101점이 나올 수 있습니다. 이 경우, 긍정응답률과 부정응답률 모두 0.5로 끝나 두 점수 모두 반올림을 하니 합이 101이 된 것입니다. 따라서 두 응답률을 비교하여 보시며 응답 경향성을 파악하시면 됩니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item border-faq">
+        <div class="accordion-header">Q. 모든 요인의 점수가 대체로 낮은 것은 어떻게 해석해야 하나요? <span class="accordion-icon">▼</span></div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div class="faq-answer">
+                    <p class="faq-content">자기보고식 검사이므로 실제 능력을 측정한다기보다 해당 요인에 대한 자신감, 흥미 등으로 해석하는 것이 좋습니다. 따라서 요인의 점수가 낮다는 것은 학생이 해당 분야에 흥미가 없거나 본인이 생각하기에 약하다고 생각하는 것이 나타난 것일 수 있습니다. 또한 지금 받은 점수가 평생 동일하게 유지되는 것이 아니므로 충분히 앞으로 더 발전시켜나가면 추후엔 더 높은 점수를 받을 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>출처: 휴노 아동·청소년 강점검사 해석지침서</p>
+</footer>
+
+<script>
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const item = header.parentElement;
+            
+            // 클릭된 아이템의 active 클래스 토글
+            item.classList.toggle('active');
+            
+            // 내용물 슬라이드 애니메이션 처리
+            const content = item.querySelector('.accordion-content');
+            if (item.classList.contains('active')) {
+                content.style.maxHeight = content.scrollHeight + "px";
+            } else {
+                content.style.maxHeight = "0px";
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
